@@ -1,632 +1,513 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Eduardo Bergamini | Portfolio</title>
-<meta name="description" content="Portfólio de Eduardo Bergamini - Designer e Fotógrafo especializado em UX/UI, design gráfico e experiências visuais.">
-<!-- Fonte minimalista e moderna -->
-<link href="https://fonts.googleapis.com/css2?family=Notable&display=swap" rel="stylesheet">
-<style>
-:root {
---bg-main: #fff;
---bg-dark: #111;
---bg-light: #f8f8f8;
---text-main: #111;
---text-secondary: #555;
---border: #e0e0e0;
---radius: 16px;
---transition: 0.3s cubic-bezier(.4,0,.2,1);
---icon-size: 24px;
---button-bg: #111;
---button-text: #fff;
---button-hover-bg: #fff;
---button-hover-text: #111;
---button-border: #111;
-}
-body {
-margin: 0;
-font-family: 'Space Grotesk', 'Inter', Arial, sans-serif;
-background: var(--bg-main);
-color: var(--text-main);
-line-height: 1.7;
-letter-spacing: 0.01em;
-transition: background var(--transition), color var(--transition);
-}
-body.dark-mode {
---bg-main: #111;
---bg-light: #181818;
---text-main: #fff;
---text-secondary: #bbb;
---border: #333;
---button-bg: #fff;
---button-text: #111;
---button-hover-bg: #111;
---button-hover-text: #fff;
---button-border: #fff;
-}
-a { text-decoration: none; color: inherit; transition: color var(--transition); }
-a:hover { text-decoration: underline; color: var(--text-main); }
-body.dark-mode a:hover { color: var(--text-main); }
-
-header {
-position: relative;
-min-height: 220px;
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: center;
-background: var(--bg-main);
-border-bottom: 2px solid var(--border);
-}
-header .header-content {
-position: relative;
-z-index: 2;
-text-align: center;
-padding: 40px 20px 24px 20px;
-}
-header h1 {
-font-size: 2.8em;
-font-weight: 700;
-margin: 0 0 10px 0;
-color: var(--text-main);
-font-family: 'Space Grotesk', sans-serif;
-text-transform: uppercase;
-letter-spacing: 0.07em;
-border-bottom: 2px solid var(--border);
-display: inline-block;
-padding-bottom: 6px;
-/* Identidade visual: underline animado */
-position: relative;
-}
-header h1::after {
-content: '';
-display: block;
-margin: 0 auto;
-width: 44px;
-height: 3px;
-background: var(--text-main);
-border-radius: 2px;
-opacity: 0.12;
-transition: width 0.3s;
-}
-header p {
-font-size: 1.15em;
-color: var(--text-secondary);
-margin: 0;
-font-weight: 400;
-font-family: 'Inter', Arial, sans-serif;
-}
-
-#darkModeToggle {
-position: absolute;
-top: 22px;
-right: 22px;
-z-index: 10;
-background: none;
-border: none;
-cursor: pointer;
-outline: none;
-}
-#darkModeToggle svg {
-display: block;
-transition: filter var(--transition);
-}
-body.dark-mode #darkModeToggle svg {
-filter: invert(1);
-}
-
-nav {
-background: var(--bg-main);
-position: sticky;
-top: 0;
-z-index: 10;
-display: flex;
-justify-content: center;
-gap: 36px;
-padding: 16px 0 12px 0;
-border-bottom: 1.5px solid var(--border);
-transition: background var(--transition), color var(--transition);
-}
-nav a {
-font-family: 'Space Grotesk', sans-serif;
-font-weight: 700;
-font-size: 1.07em;
-text-transform: uppercase;
-letter-spacing: 0.08em;
-color: var(--text-secondary);
-padding: 7px 16px;
-border-radius: var(--radius);
-transition: background var(--transition), color var(--transition);
-}
-nav a:hover, nav a.active {
-background: var(--bg-light);
-color: var(--text-main);
-}
-body.dark-mode nav {
-background: var(--bg-main);
-}
-body.dark-mode nav a {
-color: var(--text-secondary);
-}
-body.dark-mode nav a:hover, body.dark-mode nav a.active {
-background: var(--bg-light);
-color: var(--text-main);
-}
-
-/* FRASE DESTAQUE */
-.hero-highlight-section {
-display: flex;
-align-items: center;
-justify-content: center;
-margin: 40px auto 0 auto;
-max-width: 1000px;
-padding: 0 24px;
-flex-wrap: wrap;
-}
-.hero-highlight-text {
-font-family: 'Space Grotesk', sans-serif;
-font-size: 2.2em;
-font-weight: 700;
-color: var(--text-main);
-letter-spacing: 0.03em;
-line-height: 1.1;
-text-transform: uppercase;
-flex: 1 1 340px;
-min-width: 260px;
-text-align: center;
-border-bottom: 1px solid var(--border);
-padding-bottom: 10px;
-margin: 0 auto;
-}
-
-section {
-max-width: 900px;
-margin: 0 auto;
-padding: 48px 24px 36px 24px;
-}
-section h2 {
-font-size: 1.45em;
-font-weight: 700;
-margin-bottom: 26px;
-color: var(--text-main);
-letter-spacing: 0.04em;
-border-bottom: 2px solid var(--border);
-display: inline-block;
-padding-bottom: 8px;
-font-family: 'Space Grotesk', sans-serif;
-text-transform: uppercase;
-}
-
-#about p {
-font-size: 1.11em;
-color: var(--text-secondary);
-max-width: 700px;
-margin: 0 auto;
-line-height: 1.8;
-font-family: 'Inter', Arial, sans-serif;
-}
-
-/* Grid de projetos minimalista */
-.grid {
-display: grid;
-grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-gap: 32px;
-margin-top: 8px;
-}
-.card {
-background: var(--bg-main);
-border-radius: var(--radius);
-border: 1.5px solid var(--border);
-overflow: hidden;
-display: flex;
-flex-direction: column;
-transition: transform var(--transition), border-color var(--transition);
-position: relative;
-padding: 28px 22px 24px 22px;
-text-align: center;
-cursor: pointer;
-/* microanimação: linha animada */
-}
-.card::after {
-content: "";
-display: block;
-height: 2px;
-width: 0;
-background: var(--text-main);
-border-radius: 2px;
-margin: 18px auto 0 auto;
-transition: width 0.3s;
-opacity: 0.12;
-}
-.card:hover {
-transform: translateY(-2px) scale(1.016);
-border-color: var(--text-main);
-}
-.card:hover::after {
-width: 60%;
-}
-.card-content h3 {
-margin: 0 0 10px 0;
-font-size: 1.13em;
-font-weight: 700;
-color: var(--text-main);
-letter-spacing: 0.02em;
-font-family: 'Space Grotesk', sans-serif;
-text-transform: uppercase;
-}
-.card-content p {
-margin: 0;
-color: var(--text-secondary);
-font-size: 1em;
-letter-spacing: 0.01em;
-font-family: 'Inter', Arial, sans-serif;
-}
-.button {
-display: inline-block;
-margin-top: 18px;
-padding: 11px 28px;
-font-weight: 700;
-font-size: 1.05em;
-border: 2px solid var(--button-border);
-border-radius: var(--radius);
-background: var(--button-bg);
-color: var(--button-text);
-cursor: pointer;
-transition: background var(--transition), color var(--transition), border var(--transition), transform var(--transition);
-font-family: 'Space Grotesk', sans-serif;
-text-transform: uppercase;
-}
-.button:hover, .button:focus {
-background: var(--button-hover-bg);
-color: var(--button-hover-text);
-border: 2px solid var(--button-hover-text);
-transform: scale(1.04) translateY(-2px);
-outline: none;
-}
-.button:active {
-transform: scale(0.98);
-}
-
-/* Social links minimalistas */
-.social-links {
-display: flex;
-gap: 24px;
-justify-content: center;
-align-items: center;
-margin: 28px 0 16px 0;
-}
-.social-link {
-display: flex;
-align-items: center;
-gap: 8px;
-font-size: 1.03em;
-color: var(--text-main);
-transition: color var(--transition);
-font-family: 'Space Grotesk', sans-serif;
-}
-.social-link svg {
-width: var(--icon-size);
-height: var(--icon-size);
-fill: none;
-stroke: currentColor;
-color: var(--text-main);
-transition: color var(--transition);
-}
-body.dark-mode .social-link svg {
-color: #fff;
-}
-.social-link:hover svg, .social-link:focus svg {
-color: #555;
-}
-
-/* FORMULÁRIO AJUSTADO */
-.contact-form-section {
-max-width: 420px;
-margin: 0 auto 36px auto;
-background: var(--bg-light);
-border-radius: var(--radius);
-border: 1.5px solid var(--border);
-padding: 26px 18px 22px 18px;
-text-align: center;
-box-sizing: border-box; /* garante que padding não estoure o container */
-}
-.contact-form input, .contact-form textarea {
-width: 100%;
-max-width: 100%;         /* impede que ultrapasse o container */
-box-sizing: border-box;  /* padding e border inclusos na largura */
-padding: 11px 12px;
-margin-bottom: 14px;
-border: 1.5px solid var(--border);
-border-radius: var(--radius);
-font-size: 1em;
-font-family: 'Inter', Arial, sans-serif;
-background: #fff;
-color: var(--text-main);
-transition: border-color var(--transition);
-resize: none;
-display: block;          /* garante alinhamento vertical */
-}
-.contact-form input:focus, .contact-form textarea:focus {
-border-color: var(--bg-dark);
-outline: none;
-}
-.contact-form input:invalid, .contact-form textarea:invalid {
-border-color: #e74c3c;
-}
-.contact-form button {
-width: 100%;
-box-sizing: border-box;  /* previne overflow */
-padding: 11px 0;
-border: 2px solid var(--button-border);
-border-radius: var(--radius);
-background: var(--button-bg);
-color: var(--button-text);
-font-weight: 700;
-font-size: 1em;
-cursor: pointer;
-transition: background var(--transition), color var(--transition), border var(--transition);
-font-family: 'Space Grotesk', sans-serif;
-text-transform: uppercase;
-display: block;          /* alinhamento vertical */
-}
-.contact-form button:hover, .contact-form button:focus {
-background: var(--button-hover-bg);
-color: var(--button-hover-text);
-border: 2px solid var(--button-hover-text);
-}
-
-/* Footer minimalista */
-footer {
-background: #000 !important;
-color: #fff !important;
-text-align: center;
-padding: 28px 20px 20px 20px;
-margin-top: 36px;
-font-size: 1.03em;
-letter-spacing: 0.04em;
-border-radius: var(--radius) var(--radius) 0 0;
-border-top: 2px solid var(--border);
-font-family: 'Space Grotesk', sans-serif;
-}
-body.dark-mode footer {
-background: #000 !important;
-color: #fff !important;
-}
-
-/* Project details minimalista */
-.project-details {
-display: none;
-padding: 36px 16px 36px 16px;
-background: var(--bg-main);
-min-height: 100vh;
-}
-.project-details h1 {
-text-align: center;
-font-size: 1.25em;
-margin-bottom: 22px;
-color: var(--text-main);
-font-weight: 700;
-letter-spacing: 0.04em;
-font-family: 'Space Grotesk', sans-serif;
-text-transform: uppercase;
-}
-.grid-container {
-display: grid;
-grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-gap: 18px;
-max-width: 900px;
-margin: 0 auto;
-}
-.grid-container img {
-width: 100%;
-height: auto;
-border-radius: var(--radius);
-border: 1.5px solid var(--border);
-object-fit: cover;
-transition: border-color var(--transition), transform var(--transition);
-}
-.grid-container img:hover {
-border-color: var(--text-main);
-transform: scale(1.02);
-}
-.back-button {
-display: block;
-margin: 22px auto 0 auto;
-text-align: center;
-}
-
-/* Responsividade */
-@media (max-width: 900px) {
-.hero-highlight-section {
-flex-direction: column;
-align-items: center;
-}
-.hero-highlight-text {
-font-size: 1.3em;
-text-align: center;
-}
-}
-@media (max-width: 700px) {
-header h1 { font-size: 1.5em; }
-section h2 { font-size: 1em; }
-nav { gap: 12px; }
-.grid, .grid-container { grid-template-columns: 1fr; }
-section { padding: 24px 8px 18px 8px; }
-.contact-form-section { padding: 14px 6px 12px 6px; }
-.hero-highlight-section { padding: 0 8px; }
-.hero-highlight-text { font-size: 1em; }
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Eduardo Bergamini | Portfolio</title>
+  <meta name="description" content="Portfólio de Eduardo Bergamini - Designer e Fotógrafo especializado em UX/UI, design gráfico e experiências visuais.">
+  <link href="https://fonts.googleapis.com/css2?family=Notable&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-main: #fff;
+      --bg-dark: #111;
+      --bg-light: #f8f8f8;
+      --text-main: #111;
+      --text-secondary: #555;
+      --border: #e0e0e0;
+      --radius: 16px;
+      --transition: 0.3s cubic-bezier(.4,0,.2,1);
+      --icon-size: 24px;
+      --button-bg: #111;
+      --button-text: #fff;
+      --button-hover-bg: #fff;
+      --button-hover-text: #111;
+      --button-border: #111;
+    }
+    body {
+      margin: 0;
+      font-family: 'Space Grotesk', 'Inter', Arial, sans-serif;
+      background: var(--bg-main);
+      color: var(--text-main);
+      line-height: 1.7;
+      transition: background var(--transition), color var(--transition);
+    }
+    body.dark-mode {
+      --bg-main: #111;
+      --bg-light: #181818;
+      --text-main: #fff;
+      --text-secondary: #bbb;
+      --border: #333;
+      --button-bg: #fff;
+      --button-text: #111;
+      --button-hover-bg: #111;
+      --button-hover-text: #fff;
+      --button-border: #fff;
+    }
+    a { text-decoration: none; color: inherit; transition: color var(--transition);}
+    a:hover { text-decoration: underline; color: var(--text-main); }
+    header {
+      min-height: 180px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border-bottom: 2px solid var(--border);
+      background: var(--bg-main);
+    }
+    .header-content {
+      text-align: center;
+      padding: 36px 18px 18px 18px;
+    }
+    header h1 {
+      font-size: 2em;
+      font-weight: 700;
+      margin: 0 0 8px 0;
+      color: var(--text-main);
+      font-family: 'Space Grotesk', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      border-bottom: 2px solid var(--border);
+      display: inline-block;
+      padding-bottom: 6px;
+    }
+    header p {
+      font-size: 1em;
+      color: var(--text-secondary);
+      margin: 0;
+    }
+    #darkModeToggle {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      z-index: 10;
+    }
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      padding: 12px 0;
+      border-bottom: 1.5px solid var(--border);
+      background: var(--bg-main);
+      font-size: 1em;
+    }
+    nav a {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-secondary);
+      padding: 7px 14px;
+      border-radius: var(--radius);
+      transition: background var(--transition), color var(--transition);
+      outline: none;
+    }
+    nav a:hover, nav a.active {
+      background: var(--bg-light);
+      color: var(--text-main);
+    }
+    .hero-highlight-section {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 32px auto 0 auto;
+      max-width: 900px;
+      padding: 0 16px;
+      text-align: center;
+    }
+    .hero-highlight-text {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.6em;
+      font-weight: 700;
+      color: var(--text-main);
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 8px;
+      width: 100%;
+    }
+    section {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 36px 16px 24px 16px;
+    }
+    section h2 {
+      font-size: 1.25em;
+      font-weight: 700;
+      margin-bottom: 18px;
+      color: var(--text-main);
+      letter-spacing: 0.04em;
+      border-bottom: 2px solid var(--border);
+      display: inline-block;
+      padding-bottom: 4px;
+      text-transform: uppercase;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+    #about p {
+      font-size: 1.09em;
+      color: var(--text-secondary);
+      max-width: 700px;
+      margin: 0 auto;
+      font-family: 'Inter', Arial, sans-serif;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+      margin-top: 8px;
+    }
+    .card {
+      background: var(--bg-main);
+      border-radius: var(--radius);
+      border: 1.5px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      transition: transform var(--transition), border-color var(--transition);
+      text-align: center;
+      cursor: pointer;
+      padding: 18px 16px 16px 16px;
+    }
+    .card:hover {
+      transform: translateY(-2px) scale(1.02);
+      border-color: var(--text-main);
+    }
+    .card-content h3 {
+      margin: 0 0 8px 0;
+      font-size: 1.03em;
+      font-weight: 700;
+      color: var(--text-main);
+      text-transform: uppercase;
+    }
+    .card-content p {
+      margin: 0;
+      color: var(--text-secondary);
+      font-size: 0.97em;
+      font-family: 'Inter', Arial, sans-serif;
+    }
+    .button {
+      display: inline-block;
+      margin-top: 14px;
+      padding: 10px 20px;
+      font-weight: 700;
+      font-size: 1em;
+      border: 2px solid var(--button-border);
+      border-radius: var(--radius);
+      background: var(--button-bg);
+      color: var(--button-text);
+      cursor: pointer;
+      transition: background var(--transition), color var(--transition), border var(--transition), transform var(--transition);
+      font-family: 'Space Grotesk', sans-serif;
+      text-transform: uppercase;
+    }
+    .button:hover, .button:focus {
+      background: var(--button-hover-bg);
+      color: var(--button-hover-text);
+      border: 2px solid var(--button-hover-text);
+      outline: none;
+    }
+    .button:active { transform: scale(0.98);}
+    .social-links {
+      display: flex;
+      gap: 18px;
+      justify-content: center;
+      align-items: center;
+      margin: 20px 0 10px 0;
+      flex-wrap: wrap;
+    }
+    .social-link {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 1em;
+      color: var(--text-main);
+      font-family: 'Space Grotesk', sans-serif;
+      transition: color var(--transition);
+    }
+    .social-link svg {
+      width: var(--icon-size);
+      height: var(--icon-size);
+      stroke: currentColor;
+      color: var(--text-main);
+      transition: color var(--transition);
+    }
+    .social-link:hover svg, .social-link:focus svg { color: #555; }
+    .contact-form-section {
+      max-width: 400px;
+      margin: 0 auto 24px auto;
+      background: var(--bg-light);
+      border-radius: var(--radius);
+      border: 1.5px solid var(--border);
+      padding: 18px 10px 12px 10px;
+      text-align: center;
+      box-sizing: border-box;
+    }
+    .contact-form input, .contact-form textarea {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 8px 10px;
+      margin-bottom: 10px;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      font-size: 1em;
+      font-family: 'Inter', Arial, sans-serif;
+      background: #fff;
+      color: var(--text-main);
+      transition: border-color var(--transition);
+      resize: none;
+    }
+    .contact-form input:focus, .contact-form textarea:focus {
+      border-color: var(--bg-dark);
+      outline: none;
+    }
+    .contact-form button {
+      width: 100%;
+      padding: 10px 0;
+      border: 2px solid var(--button-border);
+      border-radius: var(--radius);
+      background: var(--button-bg);
+      color: var(--button-text);
+      font-weight: 700;
+      font-size: 1em;
+      cursor: pointer;
+      font-family: 'Space Grotesk', sans-serif;
+      text-transform: uppercase;
+      transition: background var(--transition), color var(--transition), border var(--transition);
+    }
+    .contact-form button:hover, .contact-form button:focus {
+      background: var(--button-hover-bg);
+      color: var(--button-hover-text);
+      border: 2px solid var(--button-hover-text);
+    }
+    footer {
+      background: #000;
+      color: #fff;
+      text-align: center;
+      padding: 18px 12px 12px 12px;
+      margin-top: 24px;
+      font-size: 1em;
+      border-radius: var(--radius) var(--radius) 0 0;
+      border-top: 2px solid var(--border);
+      font-family: 'Space Grotesk', sans-serif;
+    }
+    .project-details {
+      display: none;
+      padding: 24px 10px 24px 10px;
+      background: var(--bg-main);
+      min-height: 80vh;
+    }
+    .project-details h1 {
+      text-align: center;
+      font-size: 1.15em;
+      margin-bottom: 12px;
+      color: var(--text-main);
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      font-family: 'Space Grotesk', sans-serif;
+      text-transform: uppercase;
+    }
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 10px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .grid-container img {
+      width: 100%;
+      height: auto;
+      border-radius: var(--radius);
+      border: 1.5px solid var(--border);
+      object-fit: cover;
+      transition: border-color var(--transition), transform var(--transition);
+      background: #fafafa;
+    }
+    .grid-container img:hover {
+      border-color: var(--text-main);
+      transform: scale(1.03);
+    }
+    .back-button {
+      display: block;
+      margin: 14px auto 0 auto;
+      text-align: center;
+    }
+    @media (max-width: 700px) {
+      header h1 { font-size: 1.2em; }
+      section h2 { font-size: 1em; }
+      nav { gap: 9px; }
+      .grid, .grid-container { grid-template-columns: 1fr; }
+      section { padding: 14px 4px 10px 4px; }
+      .contact-form-section { padding: 7px 2px 7px 2px; }
+      .hero-highlight-section { padding: 0 4px; }
+      .hero-highlight-text { font-size: 0.98em; }
+    }
+    @media (max-width: 400px) {
+      header { min-height: 120px;}
+      .hero-highlight-text { font-size: 0.93em; }
+      .grid, .grid-container { gap: 6px;}
+      nav { font-size: 0.93em;}
+    }
+  </style>
 </head>
 <body>
-
-<header>
-<div class="header-content">
-<h1>Eduardo Bergamini</h1>
-<p>Designer & Photographer</p>
-</div>
-<button id="darkModeToggle" aria-label="Alternar modo escuro">
-<svg id="darkModeIcon" width="28" height="28" viewBox="0 0 24 24" fill="none">
-<circle cx="12" cy="12" r="10" stroke="#111" stroke-width="2" fill="#fff"/>
-<path d="M12 7v5l4 2" stroke="#111" stroke-width="2" stroke-linecap="round"/>
-</svg>
-</button>
-</header>
-
-<div class="hero-highlight-section">
-<span class="hero-highlight-text">Designs to build and inspire</span>
-</div>
-
-<nav>
-<a href="#about">About</a>
-<a href="#projects">Projects</a>
-<a href="#contact">Contact</a>
-</nav>
-
-<section id="about">
-<h2>About</h2>
-<p>
-I am a designer and photographer focused on UX/UI, graphic design, and visual experiences. I create digital solutions that integrate aesthetics, functionality, and visual storytelling. My work aims to be simple, impactful, and visually balanced.
-</p>
-</section>
-
-<section id="projects">
-<h2>Projects</h2>
-<div class="grid">
-<div class="card" onclick="showProject1()" tabindex="0" aria-label="View Santiago - Chile details">
-<div class="card-content">
-<h3>Santiago - Chile</h3>
-<p>Urban and architectural photography series from Santiago, Chile.</p>
-<span class="button">View Details</span>
-</div>
-</div>
-<div class="card" onclick="showProject2()" tabindex="0" aria-label="View Carlos Barbosa - Brazil details">
-<div class="card-content">
-<h3>Carlos Barbosa - Brazil</h3>
-<p>Visual exploration of Carlos Barbosa, Brazil.</p>
-<span class="button">View Details</span>
-</div>
-</div>
-</div>
-</section>
-
-<section id="contact">
-<h2>Contact</h2>
-<div class="social-links">
-<a class="social-link" href="https://instagram.com/eduardobergamini1" target="_blank" rel="noopener" title="Instagram">
-<svg class="icon-instagram" width="24" height="24" viewBox="0 0 24 24" fill="none">
-<rect x="2" y="2" width="20" height="20" rx="6" stroke="currentColor" stroke-width="2" fill="none"/>
-<circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="2" fill="none"/>
-<circle cx="17" cy="7" r="1.2" fill="currentColor"/>
-</svg>
-<span>@eduardobergamini1</span>
-</a>
-<a class="social-link" href="mailto:EduardoBergamini@outlook.com.br" title="Outlook Email">
-<svg class="icon-email" width="24" height="24" viewBox="0 0 24 24" fill="none">
-<rect x="2" y="4" width="20" height="16" rx="3" stroke="currentColor" stroke-width="2" fill="none"/>
-<polyline points="3,6 12,13 21,6" stroke="currentColor" stroke-width="2" fill="none"/>
-</svg>
-<span>EduardoBergamini@outlook.com.br</span>
-</a>
-</div>
-<p>If you want to collaborate, discuss projects, or just chat about design and photography, feel free to reach out.</p>
-</section>
-
-<section class="contact-form-section">
-<h3>Leave here your contact info<br>I'll get back to you soon</h3>
-<form class="contact-form" autocomplete="off">
-<input type="text" name="name" placeholder="Your name" required aria-label="Your name">
-<input type="email" name="email" placeholder="Your email" required aria-label="Your email">
-<textarea name="message" rows="3" placeholder="Your message (optional)" aria-label="Your message"></textarea>
-<button type="submit">Send</button>
-</form>
-</section>
-
-<footer>
-<p>© 2025 Eduardo Bergamini</p>
-</footer>
-
-<!-- Project 1 Details -->
-<section id="project1-details" class="project-details">
-<h1>Project 1 - Details</h1>
-<div class="grid-container">
-<img src="IMG_2598.jpg" alt="Arquitetura moderna" loading="lazy">
-<img src="IMG_2642.jpg" alt="Prédios históricos e modernos" loading="lazy">
-<img src="IMG_2538.jpg" alt="Mar e céu azul" loading="lazy">
-<img src="IMG_2195.jpg" alt="Vista panorâmica urbana" loading="lazy">
-<img src="IMG_2267.jpg" alt="Vista panorâmica urbana" loading="lazy">
-<img src="IMG_2323.jpg" alt="Vista panorâmica urbana" loading="lazy">
-<img src="IMG_2334.jpg" alt="Vista panorâmica urbana" loading="lazy">
-<img src="IMG_2650.jpg" alt="Vista panorâmica urbana" loading="lazy">
-<img src="IMG_2674.jpg" alt="Vista panorâmica urbana" loading="lazy">
-<img src="IMG_2679.jpg" alt="Vista panorâmica urbana" loading="lazy">
-</div>
-<span class="button back-button" onclick="showMain()">Back to Portfolio</span>
-</section>
-
-<!-- Project 2 Details -->
-<section id="project2-details" class="project-details">
-<h1>Project 2 - Details</h1>
-<div class="grid-container">
-<img src="IMG_3847.jpg" alt="Carlos Barbosa - Foto 1" loading="lazy">
-<img src="IMG_0298.jpg" alt="Carlos Barbosa - Foto 2" loading="lazy">
-</div>
-<span class="button back-button" onclick="showMain()">Back to Portfolio</span>
-</section>
-
-<script>
-// Navegação de projetos
-function showProject1() {
-document.getElementById('projects').style.display = 'none';
-document.getElementById('about').style.display = 'none';
-document.getElementById('contact').style.display = 'none';
-document.querySelector('.contact-form-section').style.display = 'none';
-document.getElementById('project1-details').style.display = 'block';
-}
-function showProject2() {
-document.getElementById('projects').style.display = 'none';
-document.getElementById('about').style.display = 'none';
-document.getElementById('contact').style.display = 'none';
-document.querySelector('.contact-form-section').style.display = 'none';
-document.getElementById('project2-details').style.display = 'block';
-}
-function showMain() {
-document.getElementById('projects').style.display = 'block';
-document.getElementById('about').style.display = 'block';
-document.getElementById('contact').style.display = 'block';
-document.querySelector('.contact-form-section').style.display = 'block';
-document.getElementById('project1-details').style.display = 'none';
-document.getElementById('project2-details').style.display = 'none';
-}
-
-// Prevent form submission (demo only)
-document.addEventListener('DOMContentLoaded', function() {
-document.querySelector('.contact-form').addEventListener('submit', function(e) {
-e.preventDefault();
-alert('Thank you! Your contact info was received.');
-this.reset();
-});
-
-// Modo noturno com persistência
-const darkBtn = document.getElementById('darkModeToggle');
-const darkIcon = document.getElementById('darkModeIcon');
-if(localStorage.getItem('darkMode') === 'true') {
-document.body.classList.add('dark-mode');
-darkIcon.innerHTML = '<circle cx="12" cy="12" r="10" stroke="#fff" stroke-width="2" fill="#111"/><path d="M12 7v5l4 2" stroke="#fff" stroke-width="2" stroke-linecap="round"/>';
-}
-darkBtn.addEventListener('click', function() {
-document.body.classList.toggle('dark-mode');
-localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
-if(document.body.classList.contains('dark-mode')) {
-darkIcon.innerHTML = '<circle cx="12" cy="12" r="10" stroke="#fff" stroke-width="2" fill="#111"/><path d="M12 7v5l4 2" stroke="#fff" stroke-width="2" stroke-linecap="round"/>';
-} else {
-darkIcon.innerHTML = '<circle cx="12" cy="12" r="10" stroke="#111" stroke-width="2" fill="#fff"/><path d="M12 7v5l4 2" stroke="#111" stroke-width="2" stroke-linecap="round"/>';
-}
-});
-});
-</script>
-
+  <header>
+    <div class="header-content">
+      <h1>Eduardo Bergamini</h1>
+      <p>Designer & Photographer</p>
+    </div>
+    <button id="darkModeToggle" aria-label="Toggle dark mode">
+      <svg id="darkModeIcon" width="28" height="28" viewBox="0 0 24 24" fill="none">
+        <circle cx="12" cy="12" r="10" stroke="#111" stroke-width="2" fill="#fff"/>
+        <path d="M12 7v5l4 2" stroke="#111" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </button>
+  </header>
+  <div class="hero-highlight-section">
+    <span class="hero-highlight-text">Designs to build and inspire</span>
+  </div>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <section id="about">
+    <h2>About</h2>
+    <p>
+      I am a designer and photographer focused on UX/UI, graphic design, and visual experiences. I create digital solutions that integrate aesthetics, functionality, and visual storytelling. My work aims to be simple, impactful, and visually balanced.
+    </p>
+  </section>
+  <section id="projects">
+    <h2>Projects</h2>
+    <div class="grid">
+      <div class="card" onclick="showProject1()" tabindex="0" aria-label="View Santiago - Chile details">
+        <div class="card-content">
+          <h3>Santiago - Chile</h3>
+          <p>Urban and architectural photography series from Santiago, Chile.</p>
+          <span class="button">View Details</span>
+        </div>
+      </div>
+      <div class="card" onclick="showProject2()" tabindex="0" aria-label="View Carlos Barbosa - Brazil details">
+        <div class="card-content">
+          <h3>Carlos Barbosa - Brazil</h3>
+          <p>Visual exploration of Carlos Barbosa, Brazil.</p>
+          <span class="button">View Details</span>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="contact">
+    <h2>Contact</h2>
+    <div class="social-links">
+      <a class="social-link" href="https://instagram.com/eduardobergamini1" target="_blank" rel="noopener" title="Instagram">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <rect x="2" y="2" width="20" height="20" rx="6" stroke="currentColor" stroke-width="2" fill="none"/>
+          <circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="2" fill="none"/>
+          <circle cx="17" cy="7" r="1.2" fill="currentColor"/>
+        </svg>
+        <span>@eduardobergamini1</span>
+      </a>
+      <a class="social-link" href="mailto:EduardoBergamini@outlook.com.br" title="Outlook Email">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <rect x="2" y="4" width="20" height="16" rx="3" stroke="currentColor" stroke-width="2" fill="none"/>
+          <polyline points="3,6 12,13 21,6" stroke="currentColor" stroke-width="2" fill="none"/>
+        </svg>
+        <span>EduardoBergamini@outlook.com.br</span>
+      </a>
+    </div>
+    <p>If you want to collaborate, discuss projects, or just chat about design and photography, feel free to reach out.</p>
+  </section>
+  <section class="contact-form-section">
+    <h3>Leave here your contact info<br>I'll get back to you soon</h3>
+    <form class="contact-form" autocomplete="off">
+      <input type="text" name="name" placeholder="Your name" required aria-label="Your name">
+      <input type="email" name="email" placeholder="Your email" required aria-label="Your email">
+      <textarea name="message" rows="3" placeholder="Your message (optional)" aria-label="Your message"></textarea>
+      <button type="submit">Send</button>
+    </form>
+  </section>
+  <footer>
+    <p>© 2025 Eduardo Bergamini</p>
+  </footer>
+  <!-- Project 1 Details -->
+  <section id="project1-details" class="project-details">
+    <h1>Project 1 - Details</h1>
+    <div class="grid-container">
+      <img src="IMG_2598.jpg" alt="Arquitetura moderna" loading="lazy">
+      <img src="IMG_2642.jpg" alt="Prédios históricos e modernos" loading="lazy">
+      <img src="IMG_2538.jpg" alt="Mar e céu azul" loading="lazy">
+      <img src="IMG_2195.jpg" alt="Vista panorâmica urbana" loading="lazy">
+      <img src="IMG_2267.jpg" alt="Vista panorâmica urbana" loading="lazy">
+      <img src="IMG_2323.jpg" alt="Vista panorâmica urbana" loading="lazy">
+      <img src="IMG_2334.jpg" alt="Vista panorâmica urbana" loading="lazy">
+      <img src="IMG_2650.jpg" alt="Vista panorâmica urbana" loading="lazy">
+      <img src="IMG_2674.jpg" alt="Vista panorâmica urbana" loading="lazy">
+      <img src="IMG_2679.jpg" alt="Vista panorâmica urbana" loading="lazy">
+    </div>
+    <span class="button back-button" onclick="showMain()">Back to Portfolio</span>
+  </section>
+  <!-- Project 2 Details -->
+  <section id="project2-details" class="project-details">
+    <h1>Project 2 - Details</h1>
+    <div class="grid-container">
+      <img src="IMG_3847.jpg" alt="Carlos Barbosa - Foto 1" loading="lazy">
+      <img src="IMG_0298.jpg" alt="Carlos Barbosa - Foto 2" loading="lazy">
+    </div>
+    <span class="button back-button" onclick="showMain()">Back to Portfolio</span>
+  </section>
+  <script>
+    // Navegação entre projetos
+    function showProject1() {
+      document.getElementById('projects').style.display = 'none';
+      document.getElementById('about').style.display = 'none';
+      document.getElementById('contact').style.display = 'none';
+      document.querySelector('.contact-form-section').style.display = 'none';
+      document.getElementById('project1-details').style.display = 'block';
+      document.getElementById('project2-details').style.display = 'none';
+    }
+    function showProject2() {
+      document.getElementById('projects').style.display = 'none';
+      document.getElementById('about').style.display = 'none';
+      document.getElementById('contact').style.display = 'none';
+      document.querySelector('.contact-form-section').style.display = 'none';
+      document.getElementById('project2-details').style.display = 'block';
+      document.getElementById('project1-details').style.display = 'none';
+    }
+    function showMain() {
+      document.getElementById('projects').style.display = 'block';
+      document.getElementById('about').style.display = 'block';
+      document.getElementById('contact').style.display = 'block';
+      document.querySelector('.contact-form-section').style.display = 'block';
+      document.getElementById('project1-details').style.display = 'none';
+      document.getElementById('project2-details').style.display = 'none';
+    }
+    // Prevent form submission
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelector('.contact-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        alert('Thank you! Your contact info was received.');
+        this.reset();
+      });
+      // Dark mode with persistence
+      const darkBtn = document.getElementById('darkModeToggle');
+      const darkIcon = document.getElementById('darkModeIcon');
+      if(localStorage.getItem('darkMode') === 'true') {
+        document.body.classList.add('dark-mode');
+        darkIcon.innerHTML = '<circle cx="12" cy="12" r="10" stroke="#fff" stroke-width="2" fill="#111"/><path d="M12 7v5l4 2" stroke="#fff" stroke-width="2" stroke-linecap="round"/>';
+      }
+      darkBtn.addEventListener('click', function() {
+        document.body.classList.toggle('dark-mode');
+        localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+        if(document.body.classList.contains('dark-mode')) {
+          darkIcon.innerHTML = '<circle cx="12" cy="12" r="10" stroke="#fff" stroke-width="2" fill="#111"/><path d="M12 7v5l4 2" stroke="#fff" stroke-width="2" stroke-linecap="round"/>';
+        } else {
+          darkIcon.innerHTML = '<circle cx="12" cy="12" r="10" stroke="#111" stroke-width="2" fill="#fff"/><path d="M12 7v5l4 2" stroke="#111" stroke-width="2" stroke-linecap="round"/>';
+        }
+      });
+    });
+  </script>
 </body>
 </html>
-
