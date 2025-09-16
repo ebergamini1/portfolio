@@ -5,7 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Eduardo Bergamini | Portfolio</title>
   <meta name="description" content="Portfólio de Eduardo Bergamini - Designer e Fotógrafo especializado em UX/UI, design gráfico e experiências visuais.">
-  <link href="https://fonts.googleapis.com/css2?family=Notable&display=swap" rel="stylesheet">
+  <!-- Fontes: Notable para título, Space Grotesk e Inter para corpo -->
+  <link href="https://fonts.googleapis.com/css2?family=Notable&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" rel="stylesheet">
   <style>
     :root {
       --bg-main: #fff;
@@ -53,6 +54,7 @@
       justify-content: center;
       border-bottom: 2px solid var(--border);
       background: var(--bg-main);
+      position: relative;
     }
     .header-content {
       text-align: center;
@@ -63,7 +65,7 @@
       font-weight: 700;
       margin: 0 0 8px 0;
       color: var(--text-main);
-      font-family: 'Space Grotesk', sans-serif;
+      font-family: 'Notable', 'Space Grotesk', sans-serif;
       text-transform: uppercase;
       letter-spacing: 0.07em;
       border-bottom: 2px solid var(--border);
@@ -154,44 +156,60 @@
       max-width: 700px;
       margin: 0 auto;
       font-family: 'Inter', Arial, sans-serif;
+      text-align: center;
     }
-    .grid {
+    .grid, .trend-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
       gap: 24px;
       margin-top: 8px;
     }
-    .card {
+    .card, .trend-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between; /* <-- ALINHA BOTÃO NA BASE */
       background: var(--bg-main);
       border-radius: var(--radius);
       border: 1.5px solid var(--border);
-      display: flex;
-      flex-direction: column;
       transition: transform var(--transition), border-color var(--transition);
       text-align: center;
       cursor: pointer;
       padding: 18px 16px 16px 16px;
+      min-height: 320px; /* <-- TODOS IGUAIS EM ALTURA */
+      box-sizing: border-box;
     }
-    .card:hover {
+    .card:hover, .trend-card:hover {
       transform: translateY(-2px) scale(1.02);
       border-color: var(--text-main);
     }
-    .card-content h3 {
+    .card-content, .trend-card-content {
+      flex: 1 1 auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .card-content h3, .trend-card h3 {
       margin: 0 0 8px 0;
       font-size: 1.03em;
       font-weight: 700;
       color: var(--text-main);
       text-transform: uppercase;
+      font-family: 'Space Grotesk', sans-serif;
     }
-    .card-content p {
-      margin: 0;
+    .card-content p, .trend-card p {
+      margin: 0 0 16px 0;
       color: var(--text-secondary);
       font-size: 0.97em;
       font-family: 'Inter', Arial, sans-serif;
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
     }
     .button {
       display: inline-block;
-      margin-top: 14px;
+      margin: 0 auto 0 auto; /* <-- CENTRALIZA HORIZONTALMENTE */
       padding: 10px 20px;
       font-weight: 700;
       font-size: 1em;
@@ -294,13 +312,16 @@
       border-top: 2px solid var(--border);
       font-family: 'Space Grotesk', sans-serif;
     }
-    .project-details {
+    .project-details,
+    .trend-details {
       display: none;
       padding: 24px 10px 24px 10px;
       background: var(--bg-main);
       min-height: 80vh;
+      max-width: 900px;
+      margin: 0 auto;
     }
-    .project-details h1 {
+    .project-details h1, .trend-details h1 {
       text-align: center;
       font-size: 1.15em;
       margin-bottom: 12px;
@@ -335,21 +356,34 @@
       margin: 14px auto 0 auto;
       text-align: center;
     }
+    .trend-details-content {
+      max-width: 700px;
+      margin: 0 auto;
+      color: var(--text-secondary);
+      font-size: 1.09em;
+      line-height: 1.8;
+      font-family: 'Inter', Arial, sans-serif;
+      text-align: center;
+    }
     @media (max-width: 700px) {
       header h1 { font-size: 1.2em; }
       section h2 { font-size: 1em; }
       nav { gap: 9px; }
-      .grid, .grid-container { grid-template-columns: 1fr; }
+      .grid, .trend-grid, .grid-container { grid-template-columns: 1fr; }
       section { padding: 14px 4px 10px 4px; }
       .contact-form-section { padding: 7px 2px 7px 2px; }
       .hero-highlight-section { padding: 0 4px; }
       .hero-highlight-text { font-size: 0.98em; }
+      .trend-details-content { font-size: 1em;}
+      .card, .trend-card { min-height: 280px; }
     }
     @media (max-width: 400px) {
       header { min-height: 120px;}
       .hero-highlight-text { font-size: 0.93em; }
-      .grid, .grid-container { gap: 6px;}
+      .grid, .trend-grid, .grid-container { gap: 6px;}
       nav { font-size: 0.93em;}
+      .trend-details-content { font-size: 0.97em;}
+      .card, .trend-card { min-height: 220px; }
     }
   </style>
 </head>
@@ -387,15 +421,42 @@
         <div class="card-content">
           <h3>Santiago - Chile</h3>
           <p>Urban and architectural photography series from Santiago, Chile.</p>
-          <span class="button">View Details</span>
         </div>
+        <span class="button">View Details</span>
       </div>
       <div class="card" onclick="showProject2()" tabindex="0" aria-label="View Carlos Barbosa - Brazil details">
         <div class="card-content">
           <h3>Carlos Barbosa - Brazil</h3>
           <p>Visual exploration of Carlos Barbosa, Brazil.</p>
-          <span class="button">View Details</span>
         </div>
+        <span class="button">View Details</span>
+      </div>
+    </div>
+  </section>
+  <!-- NOVA SEÇÃO DE TENDÊNCIAS -->
+  <section id="trends">
+    <h2>UX & Design Trends to Watch in 2025</h2>
+    <div class="trend-grid">
+      <div class="trend-card" onclick="showTrend('trend1')" tabindex="0" aria-label="View AI-driven personalization details">
+        <div class="trend-card-content">
+          <h3>AI-driven personalization</h3>
+          <p>User interfaces are moving beyond static layouts. In 2025, artificial intelligence is becoming central in adapting design to each individual user. From tailored content to dynamic layouts, personalization is no longer an extra feature but a core expectation.</p>
+        </div>
+        <span class="button">Learn More</span>
+      </div>
+      <div class="trend-card" onclick="showTrend('trend2')" tabindex="0" aria-label="View Immersive AR and VR experiences details">
+        <div class="trend-card-content">
+          <h3>Immersive AR and VR experiences</h3>
+          <p>Augmented reality (AR) and virtual reality (VR) are no longer gimmicks. They are increasingly shaping how users interact with digital products and spaces, offering immersive storytelling and transforming product exploration into engaging experiences.</p>
+        </div>
+        <span class="button">Learn More</span>
+      </div>
+      <div class="trend-card" onclick="showTrend('trend3')" tabindex="0" aria-label="View Accessibility first details">
+        <div class="trend-card-content">
+          <h3>Accessibility first</h3>
+          <p>Design is evolving from “what looks good” to “what works for everyone.” Accessibility—improved contrast, simplified navigation, dark mode options, and inclusive micro-interactions—is now a key driver in building user trust and inclusivity.</p>
+        </div>
+        <span class="button">Learn More</span>
       </div>
     </div>
   </section>
@@ -458,31 +519,99 @@
     </div>
     <span class="button back-button" onclick="showMain()">Back to Portfolio</span>
   </section>
+  <!-- Trend 1 Details -->
+  <section id="trend1-details" class="trend-details">
+    <h1>AI-driven personalization</h1>
+    <div class="trend-details-content">
+      <strong>AI-driven Personalization: The Future of User Experience</strong>
+      <br><br>
+      In recent years, digital products have shifted from being tools for the masses to becoming highly tailored experiences. At the center of this transformation is artificial intelligence (AI).<br><br>
+      AI now allows designers to create interfaces that respond to each user’s behavior in real time. Instead of a single, static layout, websites and applications are learning what users prefer, how they interact, and even when they are most active. This results in dynamic interfaces: content suggestions that feel personal, layouts that adapt to habits, and design elements that respond to subtle user signals.<br><br>
+      This shift is not only about convenience. Personalization increases engagement, improves retention, and builds stronger connections between users and brands. Companies like Spotify, Netflix, and Amazon have set the standard by proving how effective AI-driven personalization can be.<br><br>
+      However, challenges remain. Designers must consider privacy, data security, and the ethical use of AI when creating these experiences. The balance lies in building systems that adapt intelligently without overwhelming or manipulating users.<br><br>
+      In 2025, AI-driven personalization is no longer a futuristic idea—it’s the foundation of how digital experiences are being shaped.
+    </div>
+    <span class="button back-button" onclick="showMainTrends()">Back to Trends</span>
+  </section>
+  <!-- Trend 2 Details -->
+  <section id="trend2-details" class="trend-details">
+    <h1>Immersive AR and VR experiences</h1>
+    <div class="trend-details-content">
+      <strong>Beyond the Screen: How AR and VR are Redefining Interaction</strong>
+      <br><br>
+      Augmented Reality (AR) and Virtual Reality (VR) have evolved far beyond entertainment. Once considered futuristic gimmicks, they are now essential tools for creating immersive digital experiences.<br><br>
+      AR enhances the real world by overlaying digital elements onto physical environments, while VR transports users into fully constructed digital spaces. Together, they redefine how users interact with products, stories, and even each other.<br><br>
+      In retail, AR allows customers to try products virtually—placing furniture in their living room before buying or testing how clothes fit without stepping into a store. In education, VR enables students to explore historical landmarks or scientific phenomena as if they were physically there. Even healthcare is adopting AR/VR for surgical training and patient rehabilitation.<br><br>
+      For designers, the challenge is to make these experiences intuitive and accessible. The focus is shifting from flashy visuals to seamless interactions that feel natural to the user. When done right, AR and VR open doors to entirely new forms of storytelling, engagement, and problem-solving.<br><br>
+      As 2025 progresses, AR and VR are proving they’re not just side experiments but central pillars of how we engage with technology.
+    </div>
+    <span class="button back-button" onclick="showMainTrends()">Back to Trends</span>
+  </section>
+  <!-- Trend 3 Details -->
+  <section id="trend3-details" class="trend-details">
+    <h1>Accessibility first</h1>
+    <div class="trend-details-content">
+      <strong>Designing for Everyone: Accessibility as a Core Principle</strong>
+      <br><br>
+      For years, accessibility in design was treated as an afterthought—a box to tick rather than a philosophy to embrace. That mindset is quickly changing. In 2025, accessibility is at the heart of modern design.<br><br>
+      This means more than simply offering larger fonts or screen-reader support. True accessibility is about building interfaces that everyone can use comfortably, regardless of ability, environment, or device. Features like dark mode, high-contrast options, simplified navigation, and voice-controlled interfaces are now mainstream.<br><br>
+      Companies are realizing that inclusive design doesn’t just serve people with disabilities—it creates better products for all users. For example, captions on videos help not only the hearing-impaired but also people watching content in noisy environments. Clearer navigation improves usability for both visually impaired users and those accessing apps on small screens.<br><br>
+      By prioritizing accessibility, designers are also building trust. Users increasingly expect digital products to be welcoming and inclusive. When accessibility is ignored, the product risks alienating entire groups of people.<br><br>
+      The future of design is not about making things look beautiful; it’s about making them usable, meaningful, and inclusive. Accessibility isn’t optional anymore—it’s essential.
+    </div>
+    <span class="button back-button" onclick="showMainTrends()">Back to Trends</span>
+  </section>
   <script>
     // Navegação entre projetos
     function showProject1() {
-      document.getElementById('projects').style.display = 'none';
-      document.getElementById('about').style.display = 'none';
-      document.getElementById('contact').style.display = 'none';
-      document.querySelector('.contact-form-section').style.display = 'none';
+      hideAllSections();
       document.getElementById('project1-details').style.display = 'block';
-      document.getElementById('project2-details').style.display = 'none';
     }
     function showProject2() {
-      document.getElementById('projects').style.display = 'none';
-      document.getElementById('about').style.display = 'none';
-      document.getElementById('contact').style.display = 'none';
-      document.querySelector('.contact-form-section').style.display = 'none';
+      hideAllSections();
       document.getElementById('project2-details').style.display = 'block';
-      document.getElementById('project1-details').style.display = 'none';
     }
     function showMain() {
-      document.getElementById('projects').style.display = 'block';
-      document.getElementById('about').style.display = 'block';
-      document.getElementById('contact').style.display = 'block';
+      showSections(['projects', 'about', 'contact']);
       document.querySelector('.contact-form-section').style.display = 'block';
       document.getElementById('project1-details').style.display = 'none';
       document.getElementById('project2-details').style.display = 'none';
+      // trends e trend-details
+      document.getElementById('trends').style.display = 'block';
+      document.getElementById('trend1-details').style.display = 'none';
+      document.getElementById('trend2-details').style.display = 'none';
+      document.getElementById('trend3-details').style.display = 'none';
+    }
+    // Trends navigation
+    function showTrend(trendId) {
+      hideAllSections();
+      document.getElementById(trendId + '-details').style.display = 'block';
+    }
+    function showMainTrends() {
+      // Mostra só trends, esconde detalhes
+      showSections(['trends', 'about', 'projects', 'contact']);
+      document.querySelector('.contact-form-section').style.display = 'block';
+      document.getElementById('trend1-details').style.display = 'none';
+      document.getElementById('trend2-details').style.display = 'none';
+      document.getElementById('trend3-details').style.display = 'none';
+      document.getElementById('project1-details').style.display = 'none';
+      document.getElementById('project2-details').style.display = 'none';
+    }
+    function hideAllSections() {
+      // Hide main sections and trends
+      ['projects', 'about', 'contact', 'trends'].forEach(id => {
+        document.getElementById(id).style.display = 'none';
+      });
+      document.querySelector('.contact-form-section').style.display = 'none';
+      // Hide all details
+      ['project1-details', 'project2-details', 'trend1-details', 'trend2-details', 'trend3-details'].forEach(id => {
+        document.getElementById(id).style.display = 'none';
+      });
+    }
+    function showSections(sectionIds) {
+      sectionIds.forEach(id => {
+        document.getElementById(id).style.display = 'block';
+      });
     }
     // Prevent form submission
     document.addEventListener('DOMContentLoaded', function() {
