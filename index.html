@@ -6,7 +6,7 @@
   <title>Eduardo Bergamini | Portfolio</title>
   <meta name="description" content="Portfólio de Eduardo Bergamini - Designer e Fotógrafo especializado em UX/UI, design gráfico e experiências visuais.">
   <!-- Fontes: Notable para título, Space Grotesk e Inter para corpo -->
-  <link href="https://fonts.googleapis.com/css2?family=Notable&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Notable&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg-main: #fff;
@@ -167,7 +167,7 @@
     .card, .trend-card {
       display: flex;
       flex-direction: column;
-      justify-content: space-between; /* <-- ALINHA BOTÃO NA BASE */
+      justify-content: space-between;
       background: var(--bg-main);
       border-radius: var(--radius);
       border: 1.5px solid var(--border);
@@ -175,7 +175,7 @@
       text-align: center;
       cursor: pointer;
       padding: 18px 16px 16px 16px;
-      min-height: 320px; /* <-- TODOS IGUAIS EM ALTURA */
+      min-height: 320px;
       box-sizing: border-box;
     }
     .card:hover, .trend-card:hover {
@@ -209,7 +209,7 @@
     }
     .button {
       display: inline-block;
-      margin: 0 auto 0 auto; /* <-- CENTRALIZA HORIZONTALMENTE */
+      margin: 0 auto 0 auto;
       padding: 10px 20px;
       font-weight: 700;
       font-size: 1em;
@@ -365,6 +365,20 @@
       font-family: 'Inter', Arial, sans-serif;
       text-align: center;
     }
+
+    /* Tetris canvas responsivo */
+    #game-tetris {
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
+    #tetris-canvas {
+      max-width: 100vw;
+      height: auto;
+      display: block;
+      margin: 0 auto 12px auto;
+      border-radius: var(--radius);
+      box-sizing: border-box;
+    }
     @media (max-width: 700px) {
       header h1 { font-size: 1.2em; }
       section h2 { font-size: 1em; }
@@ -376,6 +390,7 @@
       .hero-highlight-text { font-size: 0.98em; }
       .trend-details-content { font-size: 1em;}
       .card, .trend-card { min-height: 280px; }
+      #tetris-canvas { width: 100vw !important; height: auto !important; }
     }
     @media (max-width: 400px) {
       header { min-height: 120px;}
@@ -384,6 +399,7 @@
       nav { font-size: 0.93em;}
       .trend-details-content { font-size: 0.97em;}
       .card, .trend-card { min-height: 220px; }
+      #tetris-canvas { width: 98vw !important; height: auto !important; }
     }
   </style>
 </head>
@@ -406,6 +422,7 @@
   <nav>
     <a href="#about">About</a>
     <a href="#projects">Projects</a>
+    <a href="#games">Games</a>
     <a href="#contact">Contact</a>
   </nav>
   <section id="about">
@@ -460,6 +477,32 @@
       </div>
     </div>
   </section>
+  
+  <!-- NOVA SEÇÃO DE GAMES -->
+  <section id="games">
+    <h2>Games</h2>
+    <p>Área dedicada para experimentos interativos em front-end e UX. Jogue e acompanhe minha evolução!</p>
+    <div class="grid" id="games-grid">
+      <div class="card">
+        <div class="card-content">
+          <h3>Tetris Minimalista</h3>
+          <p>Jogue Tetris em preto, branco e cinza. Simples, responsivo e com animações.</p>
+        </div>
+        <span class="button" onclick="showGame('tetris')">Jogar</span>
+      </div>
+      <!-- Adicione mais cards para futuros games -->
+    </div>
+  </section>
+  
+  <!-- GAME: TETRIS MINIMALISTA -->
+  <section id="game-tetris" style="display:none; text-align:center;">
+    <h2 style="margin-bottom:8px;">Tetris Minimalista</h2>
+    <canvas id="tetris-canvas" width="200" height="400" style="background:#fff; border:2px solid #111; margin-bottom:12px; border-radius:16px; max-width:100vw;"></canvas>
+    <div id="tetris-score" style="font-weight:700; color:#111; margin-bottom:12px;">Score: 0</div>
+    <span class="button back-button" onclick="showMainGames()">Voltar aos Games</span>
+    <p style="font-size:0.95em; color:#555;">Use as setas do teclado para jogar.</p>
+  </section>
+  
   <section id="contact">
     <h2>Contact</h2>
     <div class="social-links">
@@ -572,15 +615,15 @@
       document.getElementById('project2-details').style.display = 'block';
     }
     function showMain() {
-      showSections(['projects', 'about', 'contact']);
+      showSections(['projects', 'about', 'contact', 'games']);
       document.querySelector('.contact-form-section').style.display = 'block';
       document.getElementById('project1-details').style.display = 'none';
       document.getElementById('project2-details').style.display = 'none';
-      // trends e trend-details
       document.getElementById('trends').style.display = 'block';
       document.getElementById('trend1-details').style.display = 'none';
       document.getElementById('trend2-details').style.display = 'none';
       document.getElementById('trend3-details').style.display = 'none';
+      document.getElementById('game-tetris').style.display = 'none';
     }
     // Trends navigation
     function showTrend(trendId) {
@@ -588,23 +631,21 @@
       document.getElementById(trendId + '-details').style.display = 'block';
     }
     function showMainTrends() {
-      // Mostra só trends, esconde detalhes
-      showSections(['trends', 'about', 'projects', 'contact']);
+      showSections(['trends', 'about', 'projects', 'contact', 'games']);
       document.querySelector('.contact-form-section').style.display = 'block';
       document.getElementById('trend1-details').style.display = 'none';
       document.getElementById('trend2-details').style.display = 'none';
       document.getElementById('trend3-details').style.display = 'none';
       document.getElementById('project1-details').style.display = 'none';
       document.getElementById('project2-details').style.display = 'none';
+      document.getElementById('game-tetris').style.display = 'none';
     }
     function hideAllSections() {
-      // Hide main sections and trends
-      ['projects', 'about', 'contact', 'trends'].forEach(id => {
+      ['projects', 'about', 'contact', 'trends', 'games'].forEach(id => {
         document.getElementById(id).style.display = 'none';
       });
       document.querySelector('.contact-form-section').style.display = 'none';
-      // Hide all details
-      ['project1-details', 'project2-details', 'trend1-details', 'trend2-details', 'trend3-details'].forEach(id => {
+      ['project1-details', 'project2-details', 'trend1-details', 'trend2-details', 'trend3-details', 'game-tetris'].forEach(id => {
         document.getElementById(id).style.display = 'none';
       });
     }
@@ -613,6 +654,7 @@
         document.getElementById(id).style.display = 'block';
       });
     }
+
     // Prevent form submission
     document.addEventListener('DOMContentLoaded', function() {
       document.querySelector('.contact-form').addEventListener('submit', function(e) {
@@ -636,6 +678,197 @@
           darkIcon.innerHTML = '<circle cx="12" cy="12" r="10" stroke="#111" stroke-width="2" fill="#fff"/><path d="M12 7v5l4 2" stroke="#111" stroke-width="2" stroke-linecap="round"/>';
         }
       });
+
+      // TETRIS Minimalista
+      let tetrisInterval, tetrisActive = false;
+      function showGame(gameId) {
+        hideAllSections();
+        if(gameId==='tetris') {
+          document.getElementById('game-tetris').style.display = 'block';
+          startTetris();
+        }
+      }
+      window.showGame = showGame;
+      function showMainGames() {
+        showSections(['games', 'about', 'projects', 'contact', 'trends']);
+        document.querySelector('.contact-form-section').style.display = 'block';
+        document.getElementById('game-tetris').style.display = 'none';
+        stopTetris();
+      }
+      window.showMainGames = showMainGames;
+
+      // Responsivo: ajusta canvas para mobile
+      function resizeTetrisCanvas() {
+        var canvas = document.getElementById('tetris-canvas');
+        if(!canvas) return;
+        var w = window.innerWidth;
+        if(w < 430) {
+          canvas.width = 160;
+          canvas.height = 320;
+        } else if(w < 700) {
+          canvas.width = 200;
+          canvas.height = 400;
+        } else {
+          canvas.width = 200;
+          canvas.height = 400;
+        }
+      }
+      window.addEventListener('resize', resizeTetrisCanvas);
+
+      // Tetris engine
+      const canvas = document.getElementById('tetris-canvas');
+      const ctx = canvas.getContext('2d');
+      let COLS = 10, ROWS = 20, BLOCK = 20;
+      let board, score, speed, current, currentX, currentY, currentShape, flashRow = -1, flashTimer = 0;
+
+      const shapes = [
+        [[1,1,1,1]], // I
+        [[1,1],[1,1]], // O
+        [[0,1,0],[1,1,1]], // T
+        [[1,1,0],[0,1,1]], // S
+        [[0,1,1],[1,1,0]], // Z
+        [[1,0,0],[1,1,1]], // J
+        [[0,0,1],[1,1,1]]  // L
+      ];
+
+      function initTetris() {
+        resizeTetrisCanvas();
+        COLS = 10; ROWS = 20;
+        BLOCK = Math.floor(canvas.width / COLS);
+        board = Array.from({length: ROWS}, () => Array(COLS).fill(0));
+        score = 0;
+        speed = 500;
+        document.getElementById('tetris-score').innerText = "Score: 0";
+        randomShape();
+        flashRow = -1;
+        flashTimer = 0;
+      }
+
+      function randomShape() {
+        const idx = Math.floor(Math.random()*shapes.length);
+        currentShape = shapes[idx];
+        current = JSON.parse(JSON.stringify(currentShape));
+        currentX = Math.floor(COLS/2) - Math.floor(current[0].length/2);
+        currentY = 0;
+      }
+
+      function drawBlock(x, y, filled, blink=false) {
+        ctx.fillStyle = blink ? "#bbb" : filled ? "#111" : "#fff";
+        ctx.fillRect(x*BLOCK, y*BLOCK, BLOCK-1, BLOCK-1);
+        ctx.strokeStyle = "#bbb";
+        ctx.strokeRect(x*BLOCK, y*BLOCK, BLOCK, BLOCK);
+      }
+
+      function drawBoard() {
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        for(let y=0; y<ROWS; y++) {
+          for(let x=0; x<COLS; x++) {
+            let blink = (y===flashRow && flashTimer%2===1);
+            drawBlock(x, y, board[y][x], blink);
+          }
+        }
+        // Peça atual
+        for(let y=0; y<current.length; y++) {
+          for(let x=0; x<current[y].length; x++) {
+            if(current[y][x]) drawBlock(currentX+x, currentY+y, true);
+          }
+        }
+      }
+
+      function collision(dx, dy, shape=current) {
+        for(let y=0; y<shape.length; y++)
+          for(let x=0; x<shape[y].length; x++)
+            if(shape[y][x]) {
+              let nx = currentX + x + dx, ny = currentY + y + dy;
+              if(nx<0 || nx>=COLS || ny>=ROWS || (ny>=0 && board[ny][nx])) return true;
+            }
+        return false;
+      }
+
+      function merge() {
+        for(let y=0; y<current.length; y++)
+          for(let x=0; x<current[y].length; x++)
+            if(current[y][x] && currentY+y>=0)
+              board[currentY+y][currentX+x]=1;
+      }
+
+      function clearLines() {
+        let lines = 0;
+        for(let y=ROWS-1; y>=0; y--) {
+          if(board[y].every(v=>v)) {
+            flashRow = y;
+            flashTimer = 0;
+            setTimeout(function(){
+              board.splice(y,1);
+              board.unshift(Array(COLS).fill(0));
+              lines++;
+              flashRow = -1;
+              drawBoard();
+            }, 180);
+            score += 10;
+            document.getElementById('tetris-score').innerText = "Score: " + score;
+            speed = Math.max(100, speed-15);
+            setTimeout(drawBoard, 200);
+            y++;
+          }
+        }
+      }
+
+      function rotate() {
+        const rotated = current[0].map((_,i)=>current.map(row=>row[i])).reverse();
+        if(!collision(0,0,rotated)) current = rotated;
+      }
+
+      function drop() {
+        if(!tetrisActive) return;
+        if(!collision(0,1)) currentY++;
+        else {
+          merge();
+          clearLines();
+          randomShape();
+          if(collision(0,0)) {
+            setTimeout(function(){
+              alert('Game Over! Score: '+score);
+              stopTetris();
+              initTetris();
+              drawBoard();
+            }, 100);
+            return;
+          }
+        }
+        drawBoard();
+      }
+
+      document.addEventListener('keydown', function(e){
+        if(document.getElementById('game-tetris').style.display!=='block') return;
+        if(e.key==='ArrowLeft' && !collision(-1,0)) currentX--;
+        else if(e.key==='ArrowRight' && !collision(1,0)) currentX++;
+        else if(e.key==='ArrowDown') drop();
+        else if(e.key==='ArrowUp') rotate();
+        drawBoard();
+      });
+
+      // Piscar linha ao completar
+      function blinkPiece() {
+        if(document.getElementById('game-tetris').style.display==='block') {
+          flashTimer++;
+          drawBoard();
+          setTimeout(blinkPiece, 90);
+        }
+      }
+      blinkPiece();
+
+      function startTetris() {
+        tetrisActive = true;
+        initTetris();
+        drawBoard();
+        if(tetrisInterval) clearInterval(tetrisInterval);
+        tetrisInterval = setInterval(drop, speed);
+      }
+      function stopTetris() {
+        tetrisActive = false;
+        clearInterval(tetrisInterval);
+      }
     });
   </script>
 </body>
